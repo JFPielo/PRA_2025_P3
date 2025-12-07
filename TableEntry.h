@@ -8,9 +8,9 @@ using namespace std;
 template <typename V> 
 class TableEntry {
     public:
-        //Atributos
-   	string key;
-	V value;
+		//Atributos
+		string key;
+		V value;
 	
 	//Constructor 2 párametros
 	TableEntry(string key, V value){
@@ -20,12 +20,12 @@ class TableEntry {
 	//Constructor 1 parámetro
 	TableEntry(string key){
 		this -> key = key; 
-		this -> valor = NULL;
+		this -> value = V{};
 	}
 	//Constructor vacío 
 	TableEntry(){
 		this -> key = "";
-		this -> valor = NULL;
+		this -> value = V{};
 	}
 
 	//Operador ==
