@@ -14,21 +14,6 @@ class BSTree {
         int nelem;
         BSNode<T> *root;
 
-    public:
-        // miembros públicos
-        BSTree() {
-            this->nelem = 0;
-            this->root = nullptr;
-        }
-        
-        int size() const {
-            return this->nelem;
-        }
-
-        T search(T e) {
-            return search(this->root, e)->elem;
-        }
-
         BSNode<T>* search(BSNode<T>* n, T e) const {
             if (n == nullptr) {
                 throw runtime_error("Elemento no encontrado");
@@ -39,16 +24,8 @@ class BSTree {
             } else {
                 return n;
             }
-        }
+        } 
 
-        T operator[](T e) const {
-            return search(e);
-        }
-
-        void insert(T e) {
-            this->root = insert(this->root, e);
-            this->nelem++;  // y también incrementa el contador
-        }
 
         BSNode<T>* insert(BSNode<T>* n, T e){
             if (n == nullptr) {
@@ -63,22 +40,12 @@ class BSTree {
             return n;
         }   
 
-        friend std::ostream& operator<<(std::ostream &out, const BSTree<T> &bst){
-            bst.print_inorder(out, bst.root);
-            return out;
-        }
-
         void print_inorder(std::ostream &out, BSNode<T>* n) const {
-            if (n != nullptr) {                    // if n != null
-                print_inorder(out, n->left);       // inorden(n.first_descendant(), P)
-                out << n->elem << " ";             // P(n) - procesar el nodo
-                print_inorder(out, n->right);      // inorden(remaining_descendants)
+            if (n != nullptr) {                    
+                print_inorder(out, n->left);       
+                out << n->elem << " ";             
+                print_inorder(out, n->right);      
             }
-        }
-
-        void remove(T e) {
-            root = remove(this->root, e);
-            this->nelem--;  
         }
 
         BSNode<T>* remove(BSNode<T>* n, T e){
@@ -101,7 +68,6 @@ class BSTree {
             }
             return n;
         }
-
         T max(BSNode<T>* n) const{
             if(n == nullptr){
                 throw runtime_error("Árbol vacío");
@@ -120,12 +86,8 @@ class BSTree {
                 return n;
             }
         }
-
-        ~BSTree() { 
-            delete_cascade(root); 
-        }
-
-        void delete_cascade(BSNode<T>* n){
+        
+       void delete_cascade(BSNode<T>* n){
             if(n != nullptr){
                 delete_cascade(n->left);
                 delete_cascade(n->right);
@@ -133,6 +95,50 @@ class BSTree {
             }
         }
 
+    public:
+        // miembros públicos
+        BSTree() {
+            this->nelem = 0;
+            this->root = nullptr;
+        }
+        
+        int size() const {
+            return this->nelem;
+        }
+
+        T search(T e) const {
+            return search(this->root, e)->elem;
+        }
+
+        
+
+        T operator[](T e) const {
+            return search(e);
+        }
+
+        void insert(T e) {
+            this->root = insert(this->root, e);
+            this->nelem++;  // y también incrementa el contador
+        }
+
+        friend std::ostream& operator<<(std::ostream &out, const BSTree<T> &bst){
+            bst.print_inorder(out, bst.root);
+            return out;
+        }
+
+
+        void remove(T e) {
+            root = remove(this->root, e);
+            this->nelem--;  
+        }
+
+
+
+
+
+        ~BSTree() { 
+            delete_cascade(root); 
+        }
 
 };
 

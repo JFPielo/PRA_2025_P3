@@ -38,7 +38,7 @@ class HashTable: public Dict<V> {
 		delete [] table;
 	}
 
-	int capacity() const{
+	int capacity(){
 		return this->max;
 	}
 
@@ -46,7 +46,7 @@ class HashTable: public Dict<V> {
 		out << "HashTable [entries: "; 
 		 
 		out << th.n;
-		out <<" , capacity: "<< th.capacity() << "]"<< endl;
+		out <<" , capacity: "<< th.max << "]"<< endl;
 		out << "==========" << endl;
 
 		for(int i = 0; i < th.max; i++){
@@ -89,7 +89,7 @@ class HashTable: public Dict<V> {
 		return val;
 	}
 
-	int entries()override{
+	int entries() override{
 		return n;
 	}
 	
